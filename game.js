@@ -1,3 +1,5 @@
+import Column from "./column.js";
+
 export default class Game {
     constructor(player1, player2) {
         this.player1 = player1;
@@ -5,7 +7,7 @@ export default class Game {
         this.currentPlayer = 1
         this.columns = [];
         for(let i = 0; i <= 6; i++) {
-            this.columns.push()
+            this.columns.push(new Column(i));
         }
     }
     getName() {
