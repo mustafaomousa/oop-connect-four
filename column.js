@@ -22,5 +22,14 @@ export default class Column {
         } else {
             return 2;
         }
-    };
+    }
+
+    isFull(){
+        console.log('test');
+        if(this.tokens[0] !== ''){
+            return true;
+        }
+        return false;
+    }
+
 }

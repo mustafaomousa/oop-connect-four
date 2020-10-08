@@ -36,6 +36,19 @@ function updateUI() {
             }
         }
     }
+
+    for(let i = 0; i <= 6; i++){
+        let currentCol = document.getElementById(`column-${i}`);
+        let colId = currentCol.id;
+        colId = colId.slice(colId.length-1);
+        colId = Number.parseInt(colId);
+        if(game.isColumnFull(colId)){
+            currentCol.classList.add('full');
+        } else {
+            currentCol.classList.remove('full');
+        }
+    }
+
 }
 
 window.addEventListener("DOMContentLoaded", event => {
