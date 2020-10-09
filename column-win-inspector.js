@@ -8,15 +8,17 @@ export default class ColumnWinInspector {
     inspect() {
         for(let rowNum = 0; rowNum <= 2; rowNum++) {
             console.log(this.col);
-            //console.log(this.col[rowNum], this.col[rowNum + 1], this.col[rowNum + 2], this.col[rowNum+3])
-                if ((this.col.getTokenAt(rowNum) === 1)
-                    && (this.col.getTokenAt(rowNum+1) === 1)
-                    && (this.col.getTokenAt(rowNum+2) === 1) 
-                    && (this.col.getTokenAt(rowNum+3) === 1)){
-                    console.log("I'm here");
+            let token1 = this.col.getTokenAt(rowNum);
+            let token2 = this.col.getTokenAt(rowNum+1);
+            let token3 = this.col.getTokenAt(rowNum+2);
+            let token4 = this.col.getTokenAt(rowNum+3)
+            if(token1 === 1 || token1 === 2){
+                if(token1 === token2
+                && token1 === token3
+                && token1 === token4){
                     return true; 
                 }
-            
+            }
         }
         return false;
     }
