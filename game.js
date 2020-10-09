@@ -1,6 +1,7 @@
 import Column from "./column.js";
 import ColumnWinInspector from "./column-win-inspector.js";
-import RowWinInpsector from "./row-win-inspector.js";
+import RowWinInspector from "./row-win-inspector.js";
+import DiagonalWinInspector from "./diagonal-win-inspector.js";
 
 
 export default class Game {
@@ -41,6 +42,7 @@ export default class Game {
         }
         this.checkForColumnWin();
         this.checkForRowWin();
+        this.checkForDiagonalWin();
     }
     getTokenAt(row, column) {
         return this.columns[column].getTokenAt(row);
@@ -78,10 +80,10 @@ export default class Game {
         let columnArray2 = this.columns.slice(1,5);
         let columnArray3 = this.columns.slice(2,6);
         let columnArray4 = this.columns.slice(3);
-        let rowCheck1 = new RowWinInpsector(columnArray1);
-        let rowCheck2 = new RowWinInpsector(columnArray2);
-        let rowCheck3 = new RowWinInpsector(columnArray3);
-        let rowCheck4 = new RowWinInpsector(columnArray4);
+        let rowCheck1 = new RowWinInspector(columnArray1);
+        let rowCheck2 = new RowWinInspector(columnArray2);
+        let rowCheck3 = new RowWinInspector(columnArray3);
+        let rowCheck4 = new RowWinInspector(columnArray4);
         // console.log(rowCheck1.inspect(), rowCheck2.inspect(), rowCheck3.inspect(), rowCheck4.inspect())
         if(rowCheck1.inspect() > 0 
         || rowCheck2.inspect() > 0
@@ -95,5 +97,31 @@ export default class Game {
             return;
         }
     }
+
+    checkForDiagonalWin(){
+        let columnArray1 = this.columns.slice(0, 4);
+        let columnArray2 = this.columns.slice(1, 5);
+        let columnArray3 = this.columns.slice(2, 6);
+        let columnArray4 = this.columns.slice(3);
+        let diagonalCheck2 = new DiagonalWinInspector(columnArray2);
+        let diagonalCheck1 = new DiagonalWinInspector(columnArray1);
+        let diagonalCheck3 = new DiagonalWinInspector(columnArray3);
+        let diagonalCheck4 = new DiagonalWinInspector(columnArray4);
+
+        if (diagonalCheck1.inspect() > 0
+            || diagonalCheck2.inspect() > 0
+            || diagonalCheck3.inspect() > 0
+            || diagonalCheck4.inspect() > 0) {
+
+            this.winnerNumber = this.currentPlayer;
+            return;
+        };
+
+        if (this.winnerNumber === 0) {
+            return;
+        }
+
+    }
+    
 
 }
