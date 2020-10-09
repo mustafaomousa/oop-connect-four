@@ -1,5 +1,7 @@
 import Column from "./column.js";
 import ColumnWinInspector from "./column-win-inspector.js";
+import RowWinInpsector from "./row-win-inspector.js";
+
 
 export default class Game {
     constructor(player1, player2) {
@@ -16,10 +18,10 @@ export default class Game {
         if (this.winnerNumber === 3) {
             return `${ this.player1 } ties with ${ this.player2 }`;
         }
-        if(this.winnerNumber === 1){
+        if(this.winnerNumber === 2){
             return `${this.player1} wins!`
         }
-        if (this.winnerNumber === 2) {
+        if (this.winnerNumber === 1) {
             return `${this.player2} wins!`
         }
         return `${this.player1} vs ${this.player2}`;
@@ -38,6 +40,7 @@ export default class Game {
             return;
         }
         this.checkForColumnWin();
+        this.checkForRowWin();
     }
     getTokenAt(row, column) {
         return this.columns[column].getTokenAt(row);
@@ -67,6 +70,29 @@ export default class Game {
                 this.winnerNumber = this.currentPlayer;
                 return;
             } 
+        }
+    }
+    checkForRowWin() {
+        
+        let columnArray1 = this.columns.slice(0,4);
+        let columnArray2 = this.columns.slice(1,5);
+        let columnArray3 = this.columns.slice(2,6);
+        let columnArray4 = this.columns.slice(3);
+        let rowCheck1 = new RowWinInpsector(columnArray1);
+        let rowCheck2 = new RowWinInpsector(columnArray2);
+        let rowCheck3 = new RowWinInpsector(columnArray3);
+        let rowCheck4 = new RowWinInpsector(columnArray4);
+        // console.log(rowCheck1.inspect(), rowCheck2.inspect(), rowCheck3.inspect(), rowCheck4.inspect())
+        if(rowCheck1.inspect() > 0 
+        || rowCheck2.inspect() > 0
+        || rowCheck3.inspect() > 0
+        || rowCheck4.inspect() > 0) {
+            
+            this.winnerNumber = this.currentPlayer;
+            return;
+        };
+        if(this.winnerNumber === 0) {
+            return;
         }
     }
 

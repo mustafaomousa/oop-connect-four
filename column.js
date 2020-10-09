@@ -25,7 +25,6 @@ export default class Column {
     }
 
     isFull(){
-        console.log('test');
         if(this.tokens[0] !== ''){
             return true;
         }

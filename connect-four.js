@@ -25,7 +25,7 @@ function updateUI() {
             // console.log(insertedToken);
             squareId.innerHTML = "";
             if (insertedToken === 1){
-                console.log(insertedToken);
+                // console.log(insertedToken);
                 let newDiv = document.createElement('div');
                 newDiv.className = "token black";
                 squareId.appendChild(newDiv);
@@ -77,11 +77,11 @@ window.addEventListener("DOMContentLoaded", event => {
         playerName.value = "";
         player2Name.value = "";
         newGame.disabled = true;
+        clickTargets.addEventListener("click", clickListener);
         updateUI();
     })
 
-    
-    clickTargets.addEventListener("click", event => {
+    function clickListener (event) {
         let clickedCol = event.target.id;
         if (event.target.id.includes("column")){
             
@@ -92,5 +92,9 @@ window.addEventListener("DOMContentLoaded", event => {
         }
         
         updateUI();
-    });
+        if(game.winnerNumber > 0){
+            clickTargets.removeEventListener('click', clickListener);
+        }
+    } 
+    clickTargets.addEventListener("click", clickListener);  
 });
